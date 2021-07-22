@@ -28,6 +28,10 @@
 
     nGQL与openCypher的兼容性或nGQL当前版本与历史版本的兼容性。
 
+!!! enterpriseonly
+
+    描述社区版和企业版的差异。
+
 ## 通信作者
 
 [吴敏](mailto:min.wu@vesoft.com)
