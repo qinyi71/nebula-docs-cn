@@ -23,7 +23,7 @@ extra_css:
   - stylesheets/extra.css
 extra:
   nebula:
-    release: 2.1.0
+    release: 2.5.0
     nightly: v2-nightly
     master: master
     base20: 2.0
@@ -36,6 +36,8 @@ extra:
   studio:
     base111b: 1.1.1-beta
     base220: 2.2.0
+  explorer:
+    base100: 1.0.0
   exchange:
     release: master
   importer:
@@ -50,6 +52,8 @@ extra:
     release: master
   common:
     release: master
+  dashboard:
+    release: nebula-graph-dashboard-beta
   
 nav:
 
@@ -149,6 +153,7 @@ nav:
             - SHOW TAGS/EDGES: 3.ngql-guide/7.general-query-statements/6.show/15.show-tags-edges.md
             - SHOW USERS: 3.ngql-guide/7.general-query-statements/6.show/16.show-users.md
             - SHOW SESSIONS: 3.ngql-guide/7.general-query-statements/6.show/17.show-sessions.md
+            - SHOW QUERIES: 3.ngql-guide/7.general-query-statements/6.show/18.show-queries.md
 
       - 子句和选项:
           - GROUP BY: 3.ngql-guide/8.clauses-and-options/group-by.md
@@ -220,6 +225,7 @@ nav:
         # - CONFIG syntax: 3.ngql-guide/18.operation-and-maintenance-statements/1.configs-syntax.md
         - BALANCE: 3.ngql-guide/18.operation-and-maintenance-statements/2.balance-syntax.md
         - 作业管理: 3.ngql-guide/18.operation-and-maintenance-statements/4.job-statements.md
+        - 终止查询: 3.ngql-guide/18.operation-and-maintenance-statements/6.kill-query.md
 
   - 安装部署:
       - 准备资源: 4.deployment-and-installation/1.resource-preparations.md
@@ -385,7 +391,7 @@ plugins:
   - git-revision-date-localized
   - with-pdf:
       copyright: 2021 Vesoft Inc.
-      cover_subtitle: 2.1.0
+      cover_subtitle: 2.5.0
       author: 吴敏,周瑶,梁振亚
       cover: true
       back_cover: true
@@ -397,6 +403,8 @@ plugins:
 extra_javascript:
   - js/version-select.js
   - js/config.js
+  - js/jquery.js
+  - js/init.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
