@@ -130,3 +130,9 @@
 [^mt]: https://nebula-graph.com.cn/posts/meituan-graph-database-platform-practice/
 
 图还可以用于更深度的知识推理，华为、ViVo、Oppo、微信、美团等公司，将图用于表征底层知识关系的数据模型。
+
+根据文献[^Ubiquity]的统计，使用图技术最多的领域，依次是：
+
+[^Ubiquity]: https://arxiv.org/abs/1709.03188
+
+数据集成（知识图谱）、个性化推荐、欺诈与威胁检测、风险分析与合规、身份（与控制权）验证、IT基础设施管理，供应链与物流、社交网络研究。
