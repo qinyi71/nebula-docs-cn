@@ -135,6 +135,93 @@
 
 [^Ubiquity]: https://arxiv.org/abs/1709.03188
 
+## 为什么要使用图数据库
+
+虽然关系型的数据库、XML/json等半结构类型的数据库，都可以用来描述图结构的数据模型。但是，可以用一句话来回答：图（数据库）着眼于处理数据之间的关联（拓扑）关系。相比于数据本身，图（数据库）更看重数据之间的关联关系。具体来说，有这么几个优点：
+
+- 图是一种更直观、符合人脑思考直觉的知识表示方式。这使得在抽象业务问题时，着眼于“业务问题本身”，而不是“如何将问题描述为数据库的某种特定结构（例如表格结构）”。
+
+- 图也更容易发现数据的特征，例如转账的路径、近邻的社区。例如如果要分析<权力的游戏>中的的人物派别关系和人物重要性
+
+表的组织方式
+
+![image](https://www-cdn.nebula-graph.com.cn/nebula-blog/gephi-01.jpeg)
+
+远不如图的组织方式直观。
+
+![image](https://www-cdn.nebula-graph.com.cn/nebula-blog/game-of-thrones-01.png)
+
+特别是当某些中心节点被删除
+
+![image](https://www-cdn.nebula-graph.com.cn/nebula-blog/tv-game-thrones.png)
+
+或者，增加一条边，可以彻底的改变整个图拓扑，
+
+![image](https://www-cdn.nebula-graph.com.cn/nebula-blog/tv-game-thrones-02.png)
+
+虽然只是个别数据的细微改变，图可以比表更直观的发现其中的重要而系统的信息。
+
+- 图查询语言是针对图结构访问设计的，可以更加直观。例如下面是一个LDBC中的查询示例，查找某人(Person)在社交网络上发布的帖子(Posts)，以及相应的回复(Message，回复本身还会被多次回复);并且要求发帖时间、回帖时间都满足一定条件；最后根据回帖数量排序。
+
+![image](https://docs-cdn.nebula-graph.com.cn/books/images/efficientquery.png)
+
+如果使用 PostgreSQL 撰写：
+
+```SQL
+--PostgreSQL	
+WITH RECURSIVE post_all(psa_threadid
+                      , psa_thread_creatorid, psa_messageid
+                      , psa_creationdate, psa_messagetype
+                       ) AS (
+    SELECT m_messageid AS psa_threadid
+         , m_creatorid AS psa_thread_creatorid
+         , m_messageid AS psa_messageid
+         , m_creationdate, 'Post'
+      FROM message
+     WHERE 1=1 AND m_c_replyof IS NULL -- post, not comment
+       AND m_creationdate BETWEEN :startDate AND :endDate
+  UNION ALL
+    SELECT psa.psa_threadid AS psa_threadid
+         , psa.psa_thread_creatorid AS psa_thread_creatorid
+         , m_messageid, m_creationdate, 'Comment'
+      FROM message p, post_all psa
+     WHERE 1=1 AND p.m_c_replyof = psa.psa_messageid
+     AND m_creationdate BETWEEN :startDate AND :endDate
+)
+SELECT p.p_personid AS "person.id"
+     , p.p_firstname AS "person.firstName"
+     , p.p_lastname AS "person.lastName"
+     , count(DISTINCT psa.psa_threadid) AS threadCount
+END) AS messageCount
+     , count(DISTINCT psa.psa_messageid) AS messageCount
+  FROM person p left join post_all psa on (
+       1=1   AND p.p_personid = psa.psa_thread_creatorid
+   AND psa_creationdate BETWEEN :startDate AND :endDate
+   )
+ GROUP BY p.p_personid, p.p_firstname, p.p_lastname
+ ORDER BY messageCount DESC, p.p_personid
+ LIMIT 100;
+```
+
+如果使用为图专门设计的图语言(Cypher)来写，是如下形式
+
+```Cypher
+--Cypher
+MATCH (person:Person)<-[:HAS_CREATOR]-(post:Post)<-[:REPLY_OF*0..]-(reply:Message)
+WHERE  post.creationDate >= $startDate   AND  post.creationDate <= $endDate
+  AND reply.creationDate >= $startDate   AND reply.creationDate <= $endDate
+RETURN
+  person.id,   person.firstName,   person.lastName,   count(DISTINCT post) AS threadCount,
+  count(DISTINCT reply) AS messageCount
+ORDER BY
+  messageCount DESC,  person.id ASC
+LIMIT 100
+```
+
+- 由于存储引擎和查询引擎可以针对图的结构专门设计，图的遍历（对应SQL中的join）要高效的多。下图是知名产品 Neo4j 所做的一个对比[^mt]。
+
+![image](https://docs-cdn.nebula-graph.com.cn/books/images/neo4jhop.png)
+
 数据集成（知识图谱）、个性化推荐、欺诈与威胁检测、风险分析与合规、身份（与控制权）验证、IT基础设施管理，供应链与物流、社交网络研究。
 
 2019 年，根据 Garter 的问卷调研，27% 的客户（500组）在使用图数据库，20% 有计划使用。

@@ -338,6 +338,7 @@ nav:
       - 导入工具选择: 20.appendix/write-tools.md
       - 社区参与: 15.contribution/how-to-contribute.md
       - 年表: 20.appendix/20.history.md
+      - 致谢: 20.appendix/21.acknowledgement.md
 
   - PDF: ./pdf/NebulaGraph-CN.pdf
 
@@ -392,7 +393,7 @@ plugins:
   - with-pdf:
       copyright: 2021 Vesoft Inc.
       cover_subtitle: 2.5.0
-      author: 吴敏,周瑶,梁振亚
+      author: 吴敏,周瑶,梁振亚,杨怡璇
       cover: true
       back_cover: true
       cover_logo: 'https://cloud-cdn.nebula-graph.com.cn/nebula-for-pdf.png'
