@@ -67,6 +67,7 @@ https://www.marketsandmarkets.com/Market-Reports/graph-database-market-126230231
 
 [^Glang]: I. F. Cruz, A. O. Mendelzon, and P. T. Wood. A Graphical Query Language Supporting Recursion. In Proceedings of the Association for Computing Machinery Special Interest Group on Management of Data, pages 323–330. ACM Press, May 1987.
 
+
 !!! Info "本小节关于Neo4j和其创造的图查询语言Cypher的历史内容主要摘录自 ISO WG3 的工作论文"An overview of the recent history of Graph Query Languages"[^Tobias2018] 和[^Glang]，本书作者根据最新两年的进展有删减和更新。"
 
 !!! Note "关于图查询查询(Graph Query Language，GQL) 和国际标准的制定"
@@ -165,7 +166,7 @@ Cypher 启发了一系列后续的图查询语言，包括
 
 !!! note "说明"
 
-     严格说，Neo4j 也提供了不少的分布式的能力，但都和业界意义上的分布式系统有较大的不同。
+     严格说，Neo4j 也提供了不少的分布式的能力，但都和业界意义上的（对等）分布式系统有较大的不同:
 
      Neo4j 3.X 要求全量数据必须存放在单机中。虽然其也提供多机之间(Master-slave/slave)做全量复制和高可用，但数据不可切分为不同子图存放。
 
