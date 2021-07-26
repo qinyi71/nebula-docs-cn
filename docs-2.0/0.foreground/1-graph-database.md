@@ -61,11 +61,13 @@ https://www.marketsandmarkets.com/Market-Reports/graph-database-market-126230231
 
 ### （第一代）图数据库的先行者 Neo4j
 
-虽然在1970年代，人们已经提出了一些类似于"图”的数据模型和产品原型（例如 CODASYL[^DDIA])。但真正能够让“图数据库”这个概念流行起来，不得不说到这个市场最主要的先行者 Neo4j，甚至属性图和图数据库这两个主要术语就是 Neo4j 最早提出并实践的。 
+虽然在 1970 年代，人们已经提出了一些类似于"图”的数据模型和产品原型（例如 CODASYL[^DDIA])和相应的图语言 G/G+ 语言[^Glang]。但真正能够让“图数据库”这个概念流行起来，不得不说到这个市场最主要的先行者 Neo4j，甚至(标签)属性图和图数据库这两个主要术语就是 Neo4j 最早提出并实践的。 
 
 [^DDIA]: https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321
 
-!!! Info "本小节关于Neo4j和其创造的图查询语言Cypher的历史内容主要摘录自 ISO WG3 的工作论文"An overview of the recent history of Graph Query Languages"[^Tobias2018]，本书作者根据最新两年的进展有删减和更新。"
+[^Glang]: I. F. Cruz, A. O. Mendelzon, and P. T. Wood. A Graphical Query Language Supporting Recursion. In Proceedings of the Association for Computing Machinery Special Interest Group on Management of Data, pages 323–330. ACM Press, May 1987.
+
+!!! Info "本小节关于Neo4j和其创造的图查询语言Cypher的历史内容主要摘录自 ISO WG3 的工作论文"An overview of the recent history of Graph Query Languages"[^Tobias2018] 和[^Glang]，本书作者根据最新两年的进展有删减和更新。"
 
 !!! Note "关于图查询查询(Graph Query Language，GQL) 和国际标准的制定"
 
@@ -94,6 +96,9 @@ https://www.marketsandmarkets.com/Market-Reports/graph-database-market-126230231
 - 2021 年，Neo4j 完成 F 轮 3.25 亿美元的融资，是整个数据库（包括关系型）历史上最大一轮融资。
 
 [^Gremlin]: Gremlin是基于Apache TinkerPop开发的图语言(https://tinkerpop.apache.org/)。
+
+![Image](https://docs-cdn.nebula-graph.com.cn/books/images/langhis.jpg "图语言的历史")
+
 
 #### Neo4j 的早期历史
 
