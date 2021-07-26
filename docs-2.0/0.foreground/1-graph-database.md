@@ -97,9 +97,6 @@ https://www.marketsandmarkets.com/Market-Reports/graph-database-market-126230231
 
 [^Gremlin]: Gremlin是基于Apache TinkerPop开发的图语言(https://tinkerpop.apache.org/)。
 
-![Image](https://docs-cdn.nebula-graph.com.cn/books/images/langhis.jpg "图语言的历史")
-
-
 #### Neo4j 的早期历史
 
 Neo4j 和属性图这种数据模型，最早构想于 2000 年。Neo4j 的创始人们当时在开发一个媒体管理系统，所使用的数据库的 schema 经常会发生重大变化。为了支持这种灵活性，Neo4j 的联合创始人 Peter Neubauer，受到 Informix Cocoon 的启发，希望将系统能够建模为一种概念相互连接的网络。印度理工学院孟买分校的一群研究生们实现了最早的原型。Neo4j 的联合创始人 Emil Eifrém 和这些学生们花了一周的时间，将 Peter 最初的想法扩展成为一个更抽象的模型：节点通过关系连接，key-value 作为节点和关系的属性。这群人开发了一个 Java API 来和这种数据模型交互，并在关系型数据库之上实现了一个抽象层。
@@ -154,7 +151,9 @@ Cypher 启发了一系列后续的图查询语言，包括
 
 [^GSQL]: https://docs.tigergraph.com/dev/gsql-ref
 
-2020 年，Nebula Graph 以 openCypher 为基础发布其扩展的图语言 Nebula Graph Query Language, nGQL。
+2019 年，Nebula Graph 以 openCypher 为基础发布其扩展的图语言 Nebula Graph Query Language, nGQL。
+
+![Image](https://docs-cdn.nebula-graph.com.cn/books/images/langhis.jpg "图语言的历史")
 
 ### 分布式图数据库
 
