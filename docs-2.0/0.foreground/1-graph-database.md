@@ -164,13 +164,32 @@ Cypher 启发了一系列后续的图查询语言，包括
 
 2. 开源方式使得更多的人（包括代码开发者、数据科学家、产品经理等）以更加低成本和有效的方式参与新兴的技术，并反馈给社区。
 
-!!! note "说明"
+严格说，Neo4j 也提供了不少的分布式的能力，但都和业界意义上的（对等、分片的）分布式系统有较大的不同:
 
-     严格说，Neo4j 也提供了不少的分布式的能力，但都和业界意义上的（对等、分片的）分布式系统有较大的不同:
+- Neo4j 3.X 要求全量数据必须存放在单机中。虽然其也提供多机之间(Master-slave/slave)做全量复制和高可用，但数据不可切分为不同子图存放。
 
-     Neo4j 3.X 要求全量数据必须存放在单机中。虽然其也提供多机之间(Master-slave/slave)做全量复制和高可用，但数据不可切分为不同子图存放。
+![](https://docs-cdn.nebula-graph.com.cn/books/images/causal.png)
 
-     Neo4j 4.X 允许在不同机器上各存放一部分数据（子图），然后在应用层需通过一定方式拼装后(其称为编织Fabric)，将读写分发到各个机器上。这种做法需要应用层代码有大量的参与和工作。例如，设计如何把不同子图应该放置在哪些机器上，如何将从各机器获取的部分结果重新编织为最终的结果。
+- Neo4j 4.X 允许在不同机器上各存放一部分数据（子图），然后在应用层需通过一定方式拼装后(其称为编织 Fabric)[^fosdem20]，将读写分发到各个机器上。这种做法需要应用层代码有大量的参与和工作。例如，设计如何把不同子图应该放置在哪些机器上，如何将从各机器获取的部分结果重新编织为最终的结果。
+
+![](https://dist.neo4j.com/wp-content/uploads/20200131191103/Neo4j-Fabric-LDBC-sharding-scheme.jpg)
+
+[^fosdem20]: https://neo4j.com/fosdem20/
+
+
+
+其语法风格大体是
+```Cypher 
+USE graphA  # S1.1 从 Shard A 读
+MATCH (movie:Movie)
+Return movie.title AS title
+    UNION   # S2. 在代理服务器 Join 结果
+USE graphB  # S1.2 从 Shard B 读
+MATCH （move:Movie)
+RETURN movie.title AS title
+```
+
+![](https://docs-cdn.nebula-graph.com.cn/books/images/fabric.png)
 
 #### 第二代（分布式）图数据库：Titan 和其后继者 JanusGraph
 
