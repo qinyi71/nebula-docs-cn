@@ -35,3 +35,5 @@
 ## 通信作者
 
 [吴敏](mailto:min.wu@vesoft.com)
+
+如果发现本书错误，请访问[github 源文件](https://github.com/vesoft-inc/nebula-docs-cn/tree/book/docs-2.0), 通过 pull request 方式提交修改建议。
